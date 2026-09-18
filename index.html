@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo da Cobrinha</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <h1>🐍 Jogo da Cobrinha</h1>
+
+  <div class="painel">
+    <div>Pontos: <span id="pontos">0</span></div>
+    <div>Recorde: <span id="recorde">0</span></div>
+    <div class="moeda">🪙 <span id="moedas">0</span></div>
+  </div>
+
+  <canvas id="tela" width="400" height="400"></canvas>
+
+  <div class="barra-botoes">
+    <button id="btnLoja" class="secundario">🛍️ Loja de Skins</button>
+    <button id="btnReiniciar2">🔄 Reiniciar</button>
+  </div>
+
+  <p class="dica">Use as setas do teclado (ou os botões abaixo no celular) para jogar</p>
+
+  <div class="setas">
+    <button id="cima">▲</button>
+    <button id="esquerda">◀</button>
+    <button id="baixo">▼</button>
+    <button id="direita">▶</button>
+  </div>
+
+  <!-- Overlay fim de jogo -->
+  <div class="overlay" id="overlay">
+    <h2 id="mensagem">Fim de Jogo!</h2>
+    <p id="pontosFinal"></p>
+    <p id="moedasFinal" class="moeda"></p>
+    <div class="barra-botoes">
+      <button id="reiniciar">Jogar Novamente</button>
+      <button id="btnLojaOverlay" class="secundario">🛍️ Loja</button>
+    </div>
+  </div>
+
+  <!-- Overlay loja -->
+  <div class="overlay" id="overlayLoja">
+    <div class="loja-caixa">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>🛍️ Loja de Skins</h2>
+        <button class="fechar-loja" id="fecharLoja">Fechar</button>
+      </div>
+      <p class="moeda" style="margin:4px 0;">Suas moedas: 🪙 <span id="moedasLoja">0</span></p>
+      <div class="grade-skins" id="gradeSkins"></div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
