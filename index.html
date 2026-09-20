@@ -8,22 +8,29 @@
 </head>
 <body>
 
+  <div class="toast-container" id="toastContainer"></div>
+
   <h1>🐍 Jogo da Cobrinha</h1>
 
   <div class="painel">
     <div>Pontos: <span id="pontos">0</span></div>
     <div>Recorde: <span id="recorde">0</span></div>
     <div class="moeda">🪙 <span id="moedas">0</span></div>
+    <div class="nivel">Nível: <span id="nivel">1</span></div>
   </div>
 
   <canvas id="tela" width="400" height="400"></canvas>
 
   <div class="barra-botoes">
-    <button id="btnLoja" class="secundario">🛍️ Loja de Skins</button>
+    <button id="btnLoja" class="secundario">🛍️ Skins</button>
+    <button id="btnConquistas" class="quinto">🏅 Conquistas</button>
+    <button id="btnRanking" class="sexto">🏆 Ranking</button>
+    <button id="btnParede" class="terciario">🧱 Paredes: Ativas</button>
+    <button id="btnSom" class="quaternario">🔊 Som: Ligado</button>
     <button id="btnReiniciar2">🔄 Reiniciar</button>
   </div>
 
-  <p class="dica">Use as setas do teclado (ou os botões abaixo no celular) para jogar</p>
+  <p class="dica">Setas do teclado, arraste o dedo (swipe) ou os botões abaixo · ESPAÇO pausa</p>
 
   <div class="setas">
     <button id="cima">▲</button>
@@ -40,18 +47,41 @@
     <div class="barra-botoes">
       <button id="reiniciar">Jogar Novamente</button>
       <button id="btnLojaOverlay" class="secundario">🛍️ Loja</button>
+      <button id="btnRankingOverlay" class="sexto">🏆 Ranking</button>
     </div>
   </div>
 
   <!-- Overlay loja -->
   <div class="overlay" id="overlayLoja">
-    <div class="loja-caixa">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div class="caixa-modal">
+      <div class="cabecalho-modal">
         <h2>🛍️ Loja de Skins</h2>
-        <button class="fechar-loja" id="fecharLoja">Fechar</button>
+        <button id="fecharLoja">Fechar</button>
       </div>
       <p class="moeda" style="margin:4px 0;">Suas moedas: 🪙 <span id="moedasLoja">0</span></p>
       <div class="grade-skins" id="gradeSkins"></div>
+    </div>
+  </div>
+
+  <!-- Overlay conquistas -->
+  <div class="overlay" id="overlayConquistas">
+    <div class="caixa-modal">
+      <div class="cabecalho-modal">
+        <h2>🏅 Conquistas</h2>
+        <button id="fecharConquistas">Fechar</button>
+      </div>
+      <div id="listaConquistas" style="margin-top:14px;"></div>
+    </div>
+  </div>
+
+  <!-- Overlay ranking -->
+  <div class="overlay" id="overlayRanking">
+    <div class="caixa-modal">
+      <div class="cabecalho-modal">
+        <h2>🏆 Ranking Local</h2>
+        <button id="fecharRanking">Fechar</button>
+      </div>
+      <div id="listaRanking" style="margin-top:14px;"></div>
     </div>
   </div>
 
