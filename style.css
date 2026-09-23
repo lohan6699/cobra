@@ -1,0 +1,178 @@
+:root {
+  --bg1: #0f172a;
+  --bg2: #1e1b4b;
+  --panel: rgba(30, 41, 59, 0.75);
+  --accent: #22c55e;
+  --accent2: #4ade80;
+  --text: #e2e8f0;
+  --grid-a: #14203c;
+  --grid-b: #182548;
+  --ouro: #facc15;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 0%, var(--bg2), var(--bg1) 70%);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  color: var(--text);
+  gap: 14px;
+  padding: 16px;
+}
+h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 18px rgba(74,222,128,0.6);
+}
+.painel {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 15px;
+  background: var(--panel);
+  backdrop-filter: blur(6px);
+  padding: 10px 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+.painel span { font-weight: bold; }
+.moeda { color: var(--ouro); }
+.nivel { color: #38bdf8; }
+canvas { touch-action: none; }
+#tela {
+  background: var(--grid-a);
+  border: 3px solid var(--accent);
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(34,197,94,0.35), inset 0 0 40px rgba(0,0,0,0.4);
+  max-width: 92vw;
+  max-height: 58vh;
+}
+.barra-botoes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 480px;
+}
+button {
+  background: linear-gradient(180deg, var(--accent2), var(--accent));
+  color: #052e16;
+  border: none;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(34,197,94,0.35);
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(34,197,94,0.5); }
+button:active { transform: scale(0.95); }
+button.secundario { background: linear-gradient(180deg, #f0abfc, #c026d3); color: #3b0764; box-shadow: 0 4px 10px rgba(192,38,211,0.35); }
+button.terciario   { background: linear-gradient(180deg, #7dd3fc, #0284c7); color: #082f49; box-shadow: 0 4px 10px rgba(2,132,199,0.35); }
+button.quaternario { background: linear-gradient(180deg, #fca5a5, #b91c1c); color: #450a0a; box-shadow: 0 4px 10px rgba(185,28,28,0.35); }
+button.quinto      { background: linear-gradient(180deg, #fef08a, #ca8a04); color: #422006; box-shadow: 0 4px 10px rgba(202,138,4,0.35); }
+button.sexto       { background: linear-gradient(180deg, #c4b5fd, #6d28d9); color: #2e1065; box-shadow: 0 4px 10px rgba(109,40,217,0.35); }
+.dica { font-size: 13px; opacity: 0.65; text-align: center; }
+
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,14,25,0.92);
+  display: none; align-items: center; justify-content: center;
+  flex-direction: column; gap: 14px; text-align: center; padding: 20px;
+  z-index: 10;
+}
+.overlay.ativo { display: flex; }
+.overlay h2 { font-size: 32px; margin: 0; color: #fb923c; text-shadow: 0 0 12px rgba(251,146,60,0.6); }
+
+.setas {
+  display: none;
+  grid-template-columns: repeat(3, 58px);
+  grid-template-rows: repeat(2, 54px);
+  gap: 8px; justify-content: center;
+}
+.setas button {
+  font-size: 22px; padding: 0;
+  background: var(--panel); color: var(--accent2);
+  border: 2px solid var(--accent); box-shadow: none;
+}
+@media (max-width: 600px) { .setas { display: grid; } }
+#cima { grid-column: 2; grid-row: 1; }
+#esquerda { grid-column: 1; grid-row: 2; }
+#baixo { grid-column: 2; grid-row: 2; }
+#direita { grid-column: 3; grid-row: 2; }
+
+/* Caixas modais (loja / ranking / conquistas) */
+.caixa-modal {
+  background: linear-gradient(160deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 22px;
+  max-width: 640px;
+  width: 92vw;
+  max-height: 82vh;
+  overflow-y: auto;
+}
+.caixa-modal h2 { color: var(--ouro); text-shadow: 0 0 12px rgba(250,204,21,0.5); }
+.cabecalho-modal { display:flex; justify-content:space-between; align-items:center; }
+
+.grade-skins { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 14px; }
+.skin-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.skin-card.equipada { border-color: var(--accent2); box-shadow: 0 0 14px rgba(74,222,128,0.4); }
+.skin-amostra { width: 70px; height: 34px; border-radius: 17px; box-shadow: 0 0 14px rgba(0,0,0,0.4); background: #0f172a; }
+.skin-nome { font-weight: bold; font-size: 15px; }
+.skin-preco { font-size: 13px; opacity: 0.8; }
+.skin-card button { width: 100%; font-size: 13px; padding: 8px; }
+.skin-card button:disabled { background: #475569; color: #cbd5e1; cursor: default; box-shadow: none; transform: none; }
+
+/* Ranking */
+.ranking-linha {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 14px; text-align: left;
+}
+.ranking-linha:last-child { border-bottom: none; }
+.ranking-pos { font-weight: bold; color: var(--ouro); width: 30px; flex-shrink: 0; }
+.ranking-info { flex: 1; }
+.ranking-data { font-size: 12px; opacity: 0.6; }
+
+/* Conquistas */
+.conquista-linha {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px; border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  margin-bottom: 8px; opacity: 0.55; text-align: left;
+}
+.conquista-linha.desbloqueada { opacity: 1; border: 1px solid rgba(74,222,128,0.4); }
+.conquista-icone { font-size: 22px; flex-shrink: 0; }
+.conquista-texto { flex: 1; }
+.conquista-nome { font-weight: bold; font-size: 14px; }
+.conquista-desc { font-size: 12px; opacity: 0.75; }
+.conquista-recompensa { color: var(--ouro); font-weight: bold; font-size: 13px; flex-shrink: 0; }
+
+/* Toasts */
+.toast-container {
+  position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: 8px;
+  z-index: 50; align-items: center; width: 92vw; max-width: 380px;
+}
+.toast {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(250,204,21,0.4);
+  color: #fef9c3; padding: 10px 18px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  opacity: 0; transform: translateY(-12px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.toast.mostrar { opacity: 1; transform: translateY(0); }
